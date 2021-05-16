@@ -11,18 +11,29 @@ const initialState = {
     showGame: false,
 }
 
-export default class initScreen extends Component{
+export default class Menu extends Component{
 
 
     state = {
         ...initialState
     }
 
+    
+
     render() {
+
+        let funcao = this.props.funcao
+
         return (
             <View style={styles.container}>
                 <TouchableOpacity style={styles.buttons}
-                    activeOpacity={0.8}>
+                    activeOpacity={0.5}
+                    onPress={() => {
+                        this.setState({showGame: true})
+                        funcao("Game")
+                    }
+                    }
+                    >
                     <Text style={styles.buttonMenu}>Jogar</Text>
                 </TouchableOpacity>
             </View>
