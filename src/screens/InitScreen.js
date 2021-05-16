@@ -8,6 +8,10 @@ import Game from './Game'
 
 const Stack = createStackNavigator()
 
+const configHeader = {
+    headerShown: false
+}
+
 
 export default class initScreen extends Component{
 
@@ -16,9 +20,9 @@ export default class initScreen extends Component{
 
     render() {
         return (
-            <Stack.Navigator initialRouteName="Menu" >
+            <Stack.Navigator initialRouteName="Menu"
+                screenOptions={configHeader}>
                 <Stack.Screen name="Menu" component={Menu} />
-                <Stack.Screen name="Game" component={Game} />
             </Stack.Navigator>
         )
     }
