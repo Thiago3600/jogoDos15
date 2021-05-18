@@ -4,15 +4,15 @@ import {View, Text, StyleSheet, Button} from 'react-native'
 
 export default props => {
 
+    let params = null
 
-        return(
+    if(props.params !== undefined)params = props.params
+
+    return(
         <View style={styles.container}>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                {props.avancar?props.navigation.navigate(props.avancar):false}
-            </View>
-            <View style={styles.container}>
-                {props.children}
-            </View>
+            {props.avancar ?props.navigation.navigate(props.avancar, params):false}
+            {console.log(`params ${params}`)}
+            {props.children}
         </View>
     )
 }

@@ -11,7 +11,7 @@ const initialState = {
     showGame: false,
 }
 
-export default class Menu extends Component{
+export default class NewContinue extends Component{
 
 
     state = {
@@ -29,13 +29,23 @@ export default class Menu extends Component{
                 <TouchableOpacity style={styles.buttons}
                     activeOpacity={0.5}
                     onPress={() => {
-                        funcao("NewContinue")
+                        funcao("Game", true)
                     }
                     }
                     >
-                    <Text style={styles.buttonMenu}>Jogar</Text>
+                    <Text style={styles.buttonMenu}>Novo jogo</Text>
                 </TouchableOpacity>
                 {console.log(`params ${this.state}`)}
+
+                <TouchableOpacity style={styles.buttons}
+                    activeOpacity={0.5}
+                    onPress={() => {
+                        funcao("Game", false)
+                    }
+                    }
+                    >
+                    <Text style={styles.buttonMenu}>Continuar</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -54,10 +64,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: '20%',
         borderColor: 'black',
         borderWidth: 4,
-        borderRadius: 15
+        borderRadius: 15,
+        margin: 20,
     },
     buttonMenu:{
-        fontSize: commonStyles.configMenu.fontSize,
+        fontSize: 30,
         fontWeight: 'bold',
+        margin: 0,
+
     }
 })

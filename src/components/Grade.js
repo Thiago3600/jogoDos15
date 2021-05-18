@@ -19,6 +19,42 @@ export default class Grade extends Component {
         ...initialState
     }
 
+    componentDidMount = () => {
+        this._retrieveData()
+    }
+
+    _storeData = async (state) => {
+
+        const stateString = JSON.stringify(state)
+
+        try {
+          await AsyncStorage.setItem(
+            'stateString',
+            stateString
+          );
+        } catch (error) {
+          // Error saving data
+        }
+      };
+
+      _retrieveData = async () => {
+        try {
+          const stateSave = await AsyncStorage.getItem('stateString');
+          if (stateSave !== null) {
+            // We have data!!
+            const state = JSON.parse(stateSave) || initialState
+            console.log(state.blocos)
+            this.setState(state);
+          }
+        } catch (error) {
+          // Error retrieving data
+          console.log(error)
+        }
+      };
+
+    saveState = (state) => {
+        this._storeData(state) 
+    }
 
     find_dimesions(layout){
         const {x, y, width, height} = layout;
@@ -56,53 +92,35 @@ export default class Grade extends Component {
             blocos[blocoSelecionadoIndex] = this.state.blocos.length
         }
 
-        
-
-
-  
-        console.log(`blocoVazioIndex       = ${blocoVazioIndex}`)
-        console.log(`blocoSelecionadoIndex = ${blocoSelecionadoIndex}`)
-
         this.setState({numPress: num, blocos: blocos})
+        this.saveState(this.state)
     }
 
-    getBlocos = async (col, lin) => {
-
-        const stateString = await AsyncStorage.getItem('arrayNumbers4x4')
-        const state = JSON.parse(stateString) || initialState
-        this.setState(state)
+    getBlocos = (col, lin) => {
 
         let numBlocos = lin * col
         let blocosNumeros = this.state.blocos
         let blocos = []
-       // this.setState({linhas: lin, colunas: col})
-        console.log(`blocosNumeros =     ${blocosNumeros}`)
-        console.log(`this.state.blocos = ${this.state.blocos}`)
-        console.log("")
-
-        //this.setState({ myArray: [...this.state.myArray, ...[1,2,3] ] }) //another array
 
         if(!this.state.numGerado){
             blocosNumeros = new Array(numBlocos).fill(0).reduce(n => [...n, this.getRandNumberUniques(n)], [])
             this.setState({blocos: [...this.state.blocos, ...blocosNumeros], numGerado: true})
-        }
-        console.log(`blocosNumeros =     ${blocosNumeros}`)
-        console.log(`this.state.blocos = ${this.state.blocos}`)
-        console.log("")
-        
+            
+        }        
         blocos = blocosNumeros.map(numero => {
             return (<Bloco key={Math.random()} numeroPressionado={this.numPressionado} params={this.state} number={numero} />)
         }
     )
+        
         return(blocos)
     }
+
+
+
     render() {
 
         let linhas = this.props.linhas
         let colunas = this.props.colunas
-        
-
-        
         return (
             <View style={styles.container} onLayout={(event) => { this.find_dimesions(event.nativeEvent.layout) }} >
                 {this.getBlocos(linhas, colunas)}
