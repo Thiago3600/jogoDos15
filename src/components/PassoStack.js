@@ -2,17 +2,25 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native'
 
 
+
+
+
 export default props => {
 
-    let params = null
+    const params = props.params
 
-    if(props.params !== undefined)params = props.params
+    
+   console.log(props.params('check'))
+
 
     return(
         <View style={styles.container}>
-            {props.avancar ?props.navigation.navigate(props.avancar, params):false}
-            {console.log(`params ${params}`)}
-            {props.children}
+            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                {props.params && props.params('check') ?props.navigation.navigate(props.params('screen'), props.params('newGame')):false}
+            </View>
+            <View style={styles.container}>
+                {props.children}
+            </View>
         </View>
     )
 }

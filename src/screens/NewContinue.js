@@ -1,11 +1,8 @@
 import React, { Component}from 'react'
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import 'react-native-gesture-handler';
-import {createStackNavigator} from '@react-navigation/stack'
 import commonStyles from '../commonStyles'
 
-
-const Stack = createStackNavigator()
 
 const initialState = {
     showGame: false,
@@ -35,7 +32,7 @@ export default class NewContinue extends Component{
                     >
                     <Text style={styles.buttonMenu}>Novo jogo</Text>
                 </TouchableOpacity>
-                {console.log(`params ${this.state}`)}
+             
 
                 <TouchableOpacity style={styles.buttons}
                     activeOpacity={0.5}

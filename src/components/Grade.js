@@ -13,11 +13,16 @@ const initialState = {
     numGerado: false
 }
 
+
+
 export default class Grade extends Component {
 
     state = {
-        ...initialState
+        ...initialState,
+        newGame : this.props.newGame
     }
+
+    
 
     componentDidMount = () => {
         this._retrieveData()
@@ -53,7 +58,7 @@ export default class Grade extends Component {
       };
 
     saveState = (state) => {
-        this._storeData(state) 
+        this._storeData(state)        
     }
 
     find_dimesions(layout){
@@ -96,6 +101,8 @@ export default class Grade extends Component {
         this.saveState(this.state)
     }
 
+
+
     getBlocos = (col, lin) => {
 
         let numBlocos = lin * col
@@ -105,7 +112,6 @@ export default class Grade extends Component {
         if(!this.state.numGerado){
             blocosNumeros = new Array(numBlocos).fill(0).reduce(n => [...n, this.getRandNumberUniques(n)], [])
             this.setState({blocos: [...this.state.blocos, ...blocosNumeros], numGerado: true})
-            
         }        
         blocos = blocosNumeros.map(numero => {
             return (<Bloco key={Math.random()} numeroPressionado={this.numPressionado} params={this.state} number={numero} />)

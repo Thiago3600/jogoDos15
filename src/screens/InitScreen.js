@@ -16,28 +16,56 @@ const configHeader = {
 
 const initialState = {
     screenNavigation: 'Menu',
-    newGame: 'newGame',
-    continue: 'continue',
-    gameParams: null
+    newGame: true,
+    clicked: false
 }
+
+
 
 export default class initScreen extends Component{
 
     state = {
         ...initialState
     }
+
+    teste = (comand) => {
+
+        switch(comand){
+            case 'screen':
+                return this.state.screenNavigation
+                break
+            case 'newGame':
+                return this.state.newGame
+                break
+            case 'check':
+                if(this.state.clicked){
+                    this.setState({clicked: false})
+                    return true
+                }else{
+                    return this.state.clicked
+                }
+                break
+            default:
+                return false
+        }   
+    }
+
+    desativarClicked = () => {
+        this.setState({clicked: false})
+    }
+    
     
 
     screenNameMenu = (name, params = true) =>{
         if(name){
-            this.setState({screenNavigation: name})
+            this.setState({screenNavigation: name, clicked: true})
             console.log(`Nome ${name}`)
         }
-        if(params != null){
-            this.setState({gameParams: this.state.newGame})
-        }else if(params){
-            this.setState({gameParams: this.state.continue})
+
+        if(!params){
+            this.setState({newGame: false})
         }
+        
         
     }
     
@@ -47,24 +75,26 @@ export default class initScreen extends Component{
         return (
             <Stack.Navigator initialRouteName="Menu"
                 screenOptions={configHeader}>
+
                 <Stack.Screen name="Menu" >
-                {props => (
-                    <PassoStack {...props} avancar={this.state.screenNavigation}>
-                        <Menu funcao={this.screenNameMenu} />
-                    </PassoStack>
-                )}
+                    {props => (
+                        <PassoStack {...props} params={this.teste}>
+                            <Menu funcao={this.screenNameMenu} />
+                        </PassoStack>
+                    )}
                 </Stack.Screen>
+
                 <Stack.Screen name="NewContinue" >
-                {props => (
-                    <PassoStack {...props} avancar={this.state.screenNavigation} params={this.state.gameParams}>
-                        <NewContinue funcao={this.screenNameMenu}/>
-                    </PassoStack>
-                )}
-                </Stack.Screen>
-                {console.log(`params ${this.state}`)}
+                    {props => (
+                        <PassoStack {...props} params={this.teste} >
+                            <NewContinue funcao={this.screenNameMenu}/>
+                        </PassoStack>
+                    )}
+                    </Stack.Screen>
+
                 <Stack.Screen name="Game">
                     {props => (
-                        <PassoStack {...props}>
+                        <PassoStack {...props} params={this.teste}>
                             <Game {...props} />
                         </PassoStack>
                     )}

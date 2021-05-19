@@ -3,12 +3,17 @@ import {View , Text, StyleSheet } from 'react-native'
 import Grade from '../components/Grade'
 
 export default class Game extends Component {
+
+    
+    
     render() {
+        const newGame = this.props.route.params
+
         return (
             <View style={styles.container}>
                 <View style={styles.boxFora}>
                     <View style={styles.boxDentro}>
-                        <Grade linhas={4} colunas={4} />
+                        <Grade linhas={4} colunas={4} newGame={newGame} />
                     </View>
                 </View>
             </View>
