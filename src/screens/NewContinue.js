@@ -2,6 +2,7 @@ import React, { Component}from 'react'
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import 'react-native-gesture-handler';
 import commonStyles from '../commonStyles'
+//import commonStates from ''
 
 
 const initialState = {

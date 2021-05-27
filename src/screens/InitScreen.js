@@ -59,11 +59,15 @@ export default class initScreen extends Component{
     screenNameMenu = (name, params = true) =>{
         if(name){
             this.setState({screenNavigation: name, clicked: true})
-            console.log(`Nome ${name}`)
+            //console.log(`Nome ${name}`)
         }
 
         if(!params){
+
             this.setState({newGame: false})
+        }else{
+
+            this.setState({newGame: true})
         }
         
         

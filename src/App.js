@@ -2,16 +2,20 @@ import React, {Component} from 'react'
 import {SafeAreaView, Text, StyleSheet} from 'react-native'
 import InitScreen from './screens/InitScreen'
 import { NavigationContainer } from '@react-navigation/native'
+import {GameProvider} from './context/GameContext'
 
 
 
 export default class App extends Component {
     render(){
         return (
+
             <SafeAreaView style={styles.container}>
-                <NavigationContainer>
-                    <InitScreen />
-                </NavigationContainer>
+                <GameProvider>
+                    <NavigationContainer>
+                        <InitScreen />
+                    </NavigationContainer>
+                </GameProvider>
             </SafeAreaView>
         )
     }

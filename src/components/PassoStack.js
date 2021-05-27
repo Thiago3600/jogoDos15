@@ -10,13 +10,13 @@ export default props => {
     const params = props.params
 
     
-   console.log(props.params('check'))
+   //console.log(props.params('check'))
 
 
     return(
         <View style={styles.container}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                {props.params && props.params('check') ?props.navigation.navigate(props.params('screen'), props.params('newGame')):false}
+                {props.params && props.params('check') ?props.navigation.navigate(params('screen'), params('newGame')):false}
             </View>
             <View style={styles.container}>
                 {props.children}

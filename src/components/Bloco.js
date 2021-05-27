@@ -1,49 +1,42 @@
 import React, { Component} from 'react'
-import {View, Text, StyleSheet, Dimensions, TouchableOpacity} from 'react-native'
+import {View, Text, StyleSheet,TouchableOpacity} from 'react-native'
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+//import {getWidthBlock, getHeightBlock} from '../data/stateGame'
 
 const initialState = {
-    width: 0,
-    height: 0,
-    numPress: 0,
+    // width: getWidthBlock,
+    // height: getHeightBlock,
+    // numPress: 0,
 }
 
-export default class Bloco extends Component {
+export default props => {
 
-    state = {
-        ...initialState,
-    }
+    const number = props.number
+    const dimensionBlock = props.dimension
+    const numPress = props.numPress
+    const qtdBlocos = props.qtdBlocos
+    let estilo = [styles.container]
+    let estiloTxt = [styles.blocoTxt]
 
+    estilo.push(dimensionBlock())
 
     
     
-    render() {
-        
-        const number = this.props.number
-        let numPress = this.props.numeroPressionado
-        let estilo = [styles.container]
-        let estiloTxt = [styles.blocoTxt]
-
-        if(number == 16){
-            estilo.push(styles.vazio)
-            estiloTxt.push(styles.blocoVazioTxt)
-        }else{
-            estilo.push(styles.cheio)
-        }
-
-        return (
-            <TouchableOpacity activeOpacity={0.9} onPress={() => {
-                                                        this.setState({numPress: number})
-                                                        numPress(number)
-                                                    }} >
-                <View style={[estilo, {
-                            height: (this.props.params.blocoHeight) / 4,
-                            width: (this.props.params.blocoWidth - 1) / 4
-                        }]} >
-                        <Text style={estiloTxt}>{number}</Text>
-                </View>
-            </TouchableOpacity>
-        )
+    if(number == qtdBlocos()){
+        estilo.push(styles.vazio)
+        estiloTxt.push(styles.blocoVazioTxt)
+    }else{
+        estilo.push(styles.cheio)
     }
+
+    return (
+        <TouchableOpacity activeOpacity={0.7} onPress={() => numPress(number)}>
+            <View style={[estilo]}>
+                <Text style={[estiloTxt]}>{number}</Text>
+            </View>
+        </TouchableOpacity>
+    )
+    
 }
 const styles = StyleSheet.create({
     container: {
@@ -53,7 +46,7 @@ const styles = StyleSheet.create({
         
     },
     blocoTxt:{
-        fontSize: 60,
+        fontSize: RFValue(412/(8+8 + 4), 412)
     },
     vazio:{
         backgroundColor: 'rgba(0,0,0,0)',
