@@ -32,6 +32,16 @@ export default class Menu extends Component{
                     >
                     <Text style={styles.buttonMenu}>Jogar</Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity style={styles.buttons}
+                    activeOpacity={0.5}
+                    onPress={() => {
+                        funcao("Options")
+                    }
+                    }
+                    >
+                    <Text style={styles.buttonMenu}>Opções</Text>
+                </TouchableOpacity>
             
             </View>
         )
@@ -49,12 +59,16 @@ const styles = StyleSheet.create({
     buttons:{
         backgroundColor: 'white',
         paddingHorizontal: '20%',
+        width:'90%',
+        
         borderColor: 'black',
         borderWidth: 4,
-        borderRadius: 15
+        borderRadius: 15,
+        marginVertical: '5%',
     },
     buttonMenu:{
         fontSize: commonStyles.configMenu.fontSize,
         fontWeight: 'bold',
+        textAlign: 'center',
     }
 })

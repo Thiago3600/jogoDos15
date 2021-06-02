@@ -38,32 +38,7 @@ export const GameProvider = props => {
 
 
     const actions = {
-        saveGame(state, action){
-          if(action.type === 'saveGame'){
-              const statePayload = action.payload
-              _storeData(statePayload)
-          }
-        },
-        setDimension(state, action){
-          if(action.type === 'setDimension'){
-            // const statePayload = action.payload
-            // setWidthBlock(statePayload.width)
-            // setHeightBlock(statePayload.height)
-          }
-        },
-        setBlocosNumeros(state, action){
-          if(action.type === 'setBlocosNumeros'){
-            const blocosNumeros = action.payload.blocos
-            //console.log(`setBlocosNumerosPayload: ${action.payload.blocos}`)
-            setStateBlocos(blocosNumeros)
-            
-          }
-        },
-        getGameState(state, action){
-          if(action.type === 'getGameState'){
-            _retrieveData()
-          }
-        }
+        
     }
 
     

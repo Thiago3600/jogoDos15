@@ -6,6 +6,7 @@ import commonStyles from '../commonStyles'
 import PassoStack from '../components/PassoStack'
 import Menu from './Menu'
 import NewContinue from './NewContinue'
+import Options from './options'
 import Game from './Game'
 
 const Stack = createStackNavigator()
@@ -92,6 +93,14 @@ export default class initScreen extends Component{
                     {props => (
                         <PassoStack {...props} params={this.teste} >
                             <NewContinue funcao={this.screenNameMenu}/>
+                        </PassoStack>
+                    )}
+                    </Stack.Screen>
+
+                <Stack.Screen name="Options" >
+                    {props => (
+                        <PassoStack {...props} params={this.teste} >
+                            <Options funcao={this.screenNameMenu}/>
                         </PassoStack>
                     )}
                     </Stack.Screen>

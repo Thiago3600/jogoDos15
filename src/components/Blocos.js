@@ -26,6 +26,7 @@ export default props => {
     function getQtdBlock(){
         return state({type: 'qtdBlocos'})
     }
+    
 
     
 
@@ -39,6 +40,7 @@ export default props => {
                                 dimension={getDimension} 
                                 numPress={numPressionado} 
                                 qtdBlocos={getQtdBlock}
+                                
                                 />)
             }
         )
